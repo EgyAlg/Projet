@@ -24,6 +24,3 @@ class Toolbox(object):
         return SoccerAction(Vector2D(), p-self.my_position())
     def fonceur(me):
         return me.aller(me.ball_position)+me.shoot(me.but_adv)
-        
-        
-        
