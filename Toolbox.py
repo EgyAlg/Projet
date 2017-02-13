@@ -42,7 +42,13 @@ class Toolbox(object):
         if (self.id_team == 1):
             return Vector2D(0,GAME_HEIGHT/2)
         else :
-            return Vector2D(GAME_WIDTH,GAME_HEIGHT/2)        
+            return Vector2D(GAME_WIDTH,GAME_HEIGHT/2)    
+    
+    def get_pos_def(self):
+        if (self.id_team == 1):
+            return Vector2D(5,GAME_HEIGHT/2)
+        else :
+            return Vector2D(GAME_WIDTH-5,GAME_HEIGHT/2) 
             
     def mini_shoot(self, p):
         return SoccerAction(Vector2D(),(p-self.my_position())*0.015)

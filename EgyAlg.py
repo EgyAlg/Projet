@@ -34,17 +34,17 @@ class MyDefenseStrategy(Strategy):
         my_state = Toolbox(state, id_team, id_player)
         
         if(id_team == 1):
-            if((my_state.ball_position()-my_state.my_position()).norm<30):
+            if((my_state.ball_position()-my_state.my_position()).norm<35):
                 if((my_state.ball_position()-my_state.my_position()).norm<=PLAYER_RADIUS+BALL_RADIUS):    
                     return my_state.shoot(my_state.position_but_adv())
                 return my_state.aller(my_state.ball_position())
-            return my_state.aller(my_state.position_mon_but())
+            return my_state.aller(my_state.get_pos_def())
         else:
-            if((my_state.ball_position()-my_state.my_position()).norm<30):
+            if((my_state.ball_position()-my_state.my_position()).norm<35):
                 if((my_state.ball_position()-my_state.my_position()).norm<=PLAYER_RADIUS+BALL_RADIUS):    
                     return my_state.shoot(my_state.position_but_adv())
                 return my_state.aller(my_state.ball_position())
-            return my_state.aller(my_state.position_mon_but())    
+            return my_state.aller(my_state.get_pos_def())    
         
 
 class DribblerStrategy(Strategy):
