@@ -19,11 +19,11 @@ class MyAttackStrategy(Strategy):
         if(id_team == 1):
             if((my_state.ball_position()-my_state.my_position()).norm>PLAYER_RADIUS+BALL_RADIUS):
                 return my_state.aller(my_state.ball_position())    
-            return my_state.shoot(my_state.position_mon_but_et_but_adv())
+            return my_state.shoot(my_state.position_but_adv())
         else: 
             if((my_state.ball_position()-my_state.my_position()).norm>PLAYER_RADIUS+BALL_RADIUS):
                 return my_state.aller(my_state.ball_position())
-            return my_state.shoot(my_state.position_mon_but_et_but_adv())
+            return my_state.shoot(my_state.position_but_adv())
 
 
 ## Ma Strategie de defense
@@ -36,13 +36,15 @@ class MyDefenseStrategy(Strategy):
         if(id_team == 1):
             if((my_state.ball_position()-my_state.my_position()).norm<30):
                 if((my_state.ball_position()-my_state.my_position()).norm<=PLAYER_RADIUS+BALL_RADIUS):    
-                    return my_state.shoot(my_state.position_mon_but_et_but_adv())
+                    return my_state.shoot(my_state.position_but_adv())
                 return my_state.aller(my_state.ball_position())
+            return my_state.aller(my_state.position_mon_but())
         else:
             if((my_state.ball_position()-my_state.my_position()).norm<30):
                 if((my_state.ball_position()-my_state.my_position()).norm<=PLAYER_RADIUS+BALL_RADIUS):    
-                    return my_state.shoot(my_state.position_mon_but_et_but_adv())
+                    return my_state.shoot(my_state.position_but_adv())
                 return my_state.aller(my_state.ball_position())
+            return my_state.aller(my_state.position_mon_but())    
         
 
 class DribblerStrategy(Strategy):
@@ -51,19 +53,31 @@ class DribblerStrategy(Strategy):
     def compute_strategy(self, state, id_team, id_player):
         my_state = Toolbox(state, id_team, id_player)
         
-        if(id_team == 1):
-            if((my_state.ball_position()-my_state.my_position()).norm>PLAYER_RADIUS+BALL_RADIUS):
+        if (id_team == 1):
+            if((my_state.ball_position()-my_state.position_but_adv()).norm>GAME_WIDTH/3.2):
+                if((my_state.ball_position()-my_state.my_position()).norm<=PLAYER_RADIUS+BALL_RADIUS):
+                    return my_state.mini_shoot(my_state.position_but_adv())
                 return my_state.aller(my_state.ball_position())    
-            return my_state.shoot(my_state.position_mon_but_et_but_adv())
-        else: 
-            if((my_state.ball_position()-my_state.my_position()).norm>PLAYER_RADIUS+BALL_RADIUS):
+            else:
+                if((my_state.ball_position()-my_state.my_position()).norm<=PLAYER_RADIUS+BALL_RADIUS):
+                    return my_state.shoot(my_state.position_but_adv())
                 return my_state.aller(my_state.ball_position())
-            return my_state.shoot(my_state.position_mon_but_et_but_adv())
-        
+                    
+                
+        else: 
+            if((my_state.ball_position()-my_state.position_but_adv()).norm>GAME_WIDTH/3.2):
+                if((my_state.ball_position()-my_state.my_position()).norm<=PLAYER_RADIUS+BALL_RADIUS):
+                    return my_state.mini_shoot(my_state.position_but_adv())
+                return my_state.aller(my_state.ball_position())    
+            else:
+                if((my_state.ball_position()-my_state.my_position()).norm<=PLAYER_RADIUS+BALL_RADIUS):
+                    return my_state.shoot(my_state.position_but_adv())
+                return my_state.aller(my_state.ball_position())
+                
 ## Creation d'une equipe
 team1 = SoccerTeam(name="EGY",login="")
 team2 = SoccerTeam(name="ALG",login="")
 team1.add("Salah",MyAttackStrategy())
 team1.add("Warda",MyDefenseStrategy()) 
-team2.add("Mahrez",MyAttackStrategy())
+team2.add("Mahrez",DribblerStrategy())
 team2.add("Brahimi",MyDefenseStrategy()) 
