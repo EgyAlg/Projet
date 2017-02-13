@@ -67,3 +67,10 @@ team1.add("Salah",MyAttackStrategy())
 team1.add("Warda",MyDefenseStrategy()) 
 team2.add("Mahrez",MyAttackStrategy())
 team2.add("Brahimi",MyDefenseStrategy()) 
+
+#Creation d'une partie
+simu = Simulation(team1,team2)
+#Jouer et afficher la partie
+show_simu(simu)
+#Jouer sans afficher
+simu.start()
