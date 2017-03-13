@@ -14,7 +14,7 @@ def get_team(i):
     else:    
         team4 = SoccerTeam(name="EGYALG",login="")
         team4.add("Mahrez",IntelligentStrategy())
-        team4.add("Salah",IntelligentStrategy())
-        team4.add("Brahimi",MyDefenseStrategy())
+        team4.add("Salah",MyAttackStrategy())
+        team4.add("Brahimi",IntelligentStrategy())
         team4.add("Warda",MyDefenseStrategy())
         return team4

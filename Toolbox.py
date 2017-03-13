@@ -41,9 +41,6 @@ class Toolbox(object):
     def ball_positionY(self):
         return self.state.ball.position.y        
         
-    def fonceur(self,me):
-        return me.aller(me.ball_prediction())+me.shoot(me.position_but_adv())
-        
     def position_but_adv(self):
         if (self.id_team == 1):
             return Vector2D(GAME_WIDTH,GAME_HEIGHT/2)
@@ -72,12 +69,18 @@ class Toolbox(object):
         return (self.ball_prediction()-self.my_position()).norm
   
 #DEPLACEMENTS
+  
+    def fonceur(self,me):
+        return me.aller(me.ball_prediction())+me.shoot(me.position_but_adv())
 
     def ball_vitesse(self):
         return self.state.ball.vitesse 
         
     def ball_prediction(self):
-        return self.state.ball.position + self.ball_vitesse()*5
+        if (self.ball_vitesse().norm > 2 or self.ball_vitesse() < -2):
+            return self.ball_position() + self.ball_vitesse()*10
+        else:
+            return self.ball_position()
         
     def aller(self,p):
         return SoccerAction(p-self.my_position(),Vector2D())  
@@ -92,30 +95,30 @@ class Toolbox(object):
 
     def shoot(self,p):
         return SoccerAction(Vector2D(), p-self.my_position())
-        
+    
     def mini_shoot(self, p):
         return SoccerAction(Vector2D(),(p-self.my_position())*0.015)    
 
     def passe(self):
         if (self.id_player == 0):
-            return SoccerAction(Vector2D(),(self.position_player2()-self.my_position())*0.12) 
+            return SoccerAction(Vector2D(),(self.position_player2()-self.my_position())*0.15) 
         else :
-            return SoccerAction(Vector2D(),(self.position_player1()-self.my_position())*0.12) 
+            return SoccerAction(Vector2D(),(self.position_player1()-self.my_position())*0.15) 
             
     def laisse(self):
         if (self.id_player == 0):
-            if(self.distanceAuBallon()>(self.ball_position()-self.position_player2()).norm):
+            if(self.distanceAuBallon()>(self.ball_prediction()-self.position_player2()).norm):
                 return self.trace()
             else :
                 return self.aller(self.ball_prediction())
         else:
-            if(self.distanceAuBallon()>(self.ball_position()-self.position_player1()).norm):
+            if(self.distanceAuBallon()>(self.ball_prediction()-self.position_player1()).norm):
                 return self.trace()
             else :
                 return self.aller(self.ball_prediction())
             
     def trace(self):
         if (self.id_team == 1):
-            return self.aller(Vector2D(self.ball_positionX()+12,self.my_positionY()))
+            return self.aller(Vector2D(self.ball_positionX()+25,self.my_positionY()))
         else:
-            return self.aller(Vector2D(self.ball_positionX()-12,self.my_positionY()))                            
+            return self.aller(Vector2D(self.ball_positionX()-25,self.my_positionY()))                            
