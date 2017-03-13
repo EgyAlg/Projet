@@ -101,9 +101,9 @@ class Toolbox(object):
 
     def passe(self):
         if (self.id_player == 0):
-            return SoccerAction(Vector2D(),(self.position_player2()-self.my_position())*0.15) 
+            return SoccerAction(Vector2D(),(self.position_player2()-self.my_position())*0.125) 
         else :
-            return SoccerAction(Vector2D(),(self.position_player1()-self.my_position())*0.15) 
+            return SoccerAction(Vector2D(),(self.position_player1()-self.my_position())*0.125) 
             
     def laisse(self):
         if (self.id_player == 0):
@@ -119,7 +119,7 @@ class Toolbox(object):
             
     def trace(self):
         if (self.id_team == 1):
-            return self.aller(Vector2D(self.ball_positionX()+25,self.my_positionY()))
+            return self.aller(Vector2D(self.ball_positionX()+30,self.my_positionY()))
         else:
-            return self.aller(Vector2D(self.ball_positionX()-25,self.my_positionY()))                            
+            return self.aller(Vector2D(self.ball_positionX()-30,self.my_positionY()))                            
         
