@@ -40,7 +40,7 @@ class Toolbox(object):
 
     def ball_positionY(self):
         return self.state.ball.position.y        
-        
+
     def position_but_adv(self):
         if (self.id_team == 1):
             return Vector2D(GAME_WIDTH,GAME_HEIGHT/2)
@@ -95,7 +95,7 @@ class Toolbox(object):
 
     def shoot(self,p):
         return SoccerAction(Vector2D(), p-self.my_position())
-    
+
     def mini_shoot(self, p):
         return SoccerAction(Vector2D(),(p-self.my_position())*0.015)    
 
@@ -122,3 +122,4 @@ class Toolbox(object):
             return self.aller(Vector2D(self.ball_positionX()+25,self.my_positionY()))
         else:
             return self.aller(Vector2D(self.ball_positionX()-25,self.my_positionY()))                            
+        

@@ -74,14 +74,14 @@ class IntelligentStrategy(Strategy):
 ## Creation d'une equipe
 team1 = SoccerTeam(name="EGY",login="")
 team2 = SoccerTeam(name="ALG",login="")
-team1.add("Salah",MyAttackStrategy())
+#team1.add("Salah",MyAttackStrategy())
 team1.add("Warda",MyDefenseStrategy())
-team1.add("Trezeguet",IntelligentStrategy())
-team1.add("Kahraba",IntelligentStrategy())  
+#team1.add("Trezeguet",IntelligentStrategy())
+#team1.add("Kahraba",IntelligentStrategy())  
 team2.add("Mahrez",IntelligentStrategy())
 team2.add("Brahimi",IntelligentStrategy())
-team2.add("Mandi",MyDefenseStrategy()) 
-team2.add("Soudani",MyAttackStrategy()) 
+#team2.add("Mandi",MyDefenseStrategy()) 
+#team2.add("Soudani",MyAttackStrategy()) 
 
 #Creation d'une partie
 simu = Simulation(team1,team2)
