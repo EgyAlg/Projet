@@ -50,6 +50,7 @@ class DribblerStrategy(Strategy):
             else:
                 return my_state.shoot(my_state.position_but_adv())
 
+## Strategie PES
 class IntelligentStrategy(Strategy):
     def __init__(self):
         Strategy.__init__(self, "Strategie Intelligente")

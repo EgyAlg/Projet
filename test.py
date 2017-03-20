@@ -56,11 +56,11 @@ class IntelligentStrategy(Strategy):
     def compute_strategy(self, state, id_team, id_player):
         my_state = Toolbox(state, id_team, id_player)
         
-        if(my_state.distanceAuButAdv()>GAME_WIDTH/1.5):
+        if(my_state.distanceAuButAdv()>GAME_WIDTH/2):
             if(my_state.distanceAuBallon()>PLAYER_RADIUS+BALL_RADIUS):
                 return my_state.laisse()
             else:
-                return my_state.shoot(my_state.position_but_adv())
+                return my_state.mini_shoot(my_state.position_but_adv())
         else:    
             if(my_state.distanceAuBallon()>PLAYER_RADIUS+BALL_RADIUS):
                 return my_state.laisse()
@@ -74,7 +74,7 @@ class IntelligentStrategy(Strategy):
 ## Creation d'une equipe
 team1 = SoccerTeam(name="EGY",login="")
 team2 = SoccerTeam(name="ALG",login="")
-#team1.add("Salah",MyAttackStrategy())
+team1.add("Salah",MyAttackStrategy())
 team1.add("Warda",MyDefenseStrategy())
 #team1.add("Trezeguet",IntelligentStrategy())
 #team1.add("Kahraba",IntelligentStrategy())  
